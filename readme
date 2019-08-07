@@ -1,7 +1,26 @@
+1. To run the codes in command line:
+-java com.interview.EventReader.ReadFile  log.json
+
+2. Introduction
+Firstly EventReader will read the json file(by passing file path) line by line. For each line, EventPaser is called to
+map the json object to an Event object. A HashMap(id, event) is used to store the events.
+After an event is obtained, we will check :
+i)If the event is not existed,  the event is added in the HashMap.
+ii)If the event is already existed , the duration is calculated. If the duration is longer than 4ms, the alert field in the Event
+will be set to true. Then EventWriter will be called to write to database. After that, the event will be removed from the HashMap.
+HsqlDBWriter is dealing with all the database details.
+
+
+
+
+
 Coding Assignment
 Introduction & Background
 Thank you for showing interest in our Java Engineer role within Developer Tools & Services at Credit Suisse! In order to be an engineer working on the Credit Suisse build, release & deployment platform, a strong understanding of Java programming is essential to being a successful member of the team. We understand that asking candidates to complete this challenge prior to any interviews may be strange - we do this because the criticality of this technical skill is essential to our goal to build a team of strong engineers who can work to build, grow, and maintain the bank's strategic tool chain.
 All coding challenge submissions are reviewed by senior technical engineers on our team, and give us a good idea for your coding style. We ask all candidates across the globe to complete this challenge as we feel it aids in ensuring that only highly skilled and competent java engineers move forward in our recruitment process.
+
+
+
 The challenge below is a generic java programming task that should take no more than 1-2 hours to complete. If you find it begins to take you significantly longer than 2 hours, don't worry - simply submit what you have completed and provide a few bullets of what your next steps would be.
 The challenge can be found directly below - please be sure to submit your final product to Github, along with instructions on how to run / test the program from the command line.
 Requirements for this coding assignment:

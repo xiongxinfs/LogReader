@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.interview.HsqlDBWriterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-08-07T00:13:29" hostname="MacBookAir.home" time="0.504">
+<testsuite name="com.interview.HsqlDBWriterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-08-07T07:28:09" hostname="MacBookAir.home" time="0.517">
   <properties/>
-  <testcase name="test" classname="com.interview.HsqlDBWriterTest" time="0.504"/>
+  <testcase name="test" classname="com.interview.HsqlDBWriterTest" time="0.517"/>
   <system-out><![CDATA[java.sql.SQLException: primary key already exist
 	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
 	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
