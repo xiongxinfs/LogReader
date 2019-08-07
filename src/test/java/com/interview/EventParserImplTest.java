@@ -16,7 +16,6 @@ public class EventParserImplTest {
     }
 
 
-
     @Test
     public void shouldParseSuccessfully(){
 

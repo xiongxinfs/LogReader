@@ -1,25 +1,28 @@
 package com.interview;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventReader {
+public class EventLoader {
 
     private final EventParser eventParser;
     private final EventWriter eventWriter;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private Map<String, Event> events = new HashMap<>();
 
-    public EventReader(EventParser eventParser, EventWriter eventWriter) {
+    public EventLoader(EventParser eventParser, EventWriter eventWriter) {
         this.eventParser = eventParser;
         this.eventWriter = eventWriter;
     }
 
-    public void readFile(String filePath) {
+    public void load(String filePath) {
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
@@ -35,27 +38,23 @@ public class EventReader {
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("Error loading file: ", e);
         }
     }
 
     private void updateEvent(Event existingEvent, Event newEvent) {
 
-        long duration = 0;
         if(existingEvent.getState() == Event.State.STARTED && newEvent.getState() == Event.State.FINISHED){
-            //existingEvent.setDuration(newEvent.getTimeStamp() - existingEvent.getTimeStamp());
-            duration = newEvent.getTimeStamp() - existingEvent.getTimeStamp();
+            existingEvent.setDuration(newEvent.getTimeStamp() - existingEvent.getTimeStamp());
         }
         else if(existingEvent.getState() == Event.State.FINISHED && newEvent.getState() == Event.State.STARTED){
-            //existingEvent.setDuration(existingEvent.getTimeStamp() - newEvent.getTimeStamp());
-            duration = existingEvent.getTimeStamp() - newEvent.getTimeStamp();
+            existingEvent.setDuration(existingEvent.getTimeStamp() - newEvent.getTimeStamp());
         }
         else{
             throw new RuntimeException(String.format("Invalid log data for event: %s", existingEvent.getId()));
         }
-        if(duration > 0) {
-            existingEvent.setDuration(duration);
-            existingEvent.setAlert(duration >= 4 ? true : false);
+        if(existingEvent.getDuration() > 4) {
+            existingEvent.setAlert(true);
         }
     }
 

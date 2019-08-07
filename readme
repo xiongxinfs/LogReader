@@ -1,5 +1,5 @@
 1. To run the codes in command line:
--java com.interview.EventReader.ReadFile  log.json
+-java com.interview.EventLoader.ReadFile  log.json
 
 2. Introduction
 Firstly EventReader will read the json file(by passing file path) line by line. For each line, EventPaser is called to

@@ -10,17 +10,17 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EventReaderTest {
+public class EventLoaderTest {
     @Mock
     private EventWriter eventWriter;
-    private EventReader reader;
+    private EventLoader reader;
 
     @Test
-    public void shouldReadFileSuccessfully() {
+    public void shouldLoadFileSuccessfully() {
 
         EventParser eventParser = new EventParserImpl();
-        reader = new EventReader(eventParser, eventWriter);
-        reader.readFile("log.json");
+        reader = new EventLoader(eventParser, eventWriter);
+        reader.load("log.json");
 
         verify(eventWriter, times(3)).write(any(Event.class));
     }
